@@ -1,0 +1,6 @@
+pandas
+numpy
+openai-whisper
+fastapi
+uvicorn
+pydantic
