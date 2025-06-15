@@ -1,1 +1,1 @@
-# speech-2-text-app
+# speech-2-text-app that enhanced result with LLM
