@@ -28,11 +28,21 @@ spec:
             memory: 8Gi
       - image: curlimages/curl
         name: load-model
+        command: ["/bin/sh", "-c"]
+        args:
+          - "sleep infinity"
+        lifecycle:
+          postStart:
+            exec:
+              command:
+                - "/bin/sh"
+                - "-c" 
+                - "curl -X POST http://localhost:11434/api/pull -H 'Content-Type: application/json' -d '{\"name\": \"llama3.2\"}'"
         resources:
+          requests:
+            memory: 50Mi
+            cpu: 25m
           limits:
             memory: 50Mi
             cpu: 25m
-        command: ["/bin/sh", "-c"]
-        args:
-          - "curl -X POST http://localhost:11434/api/pull -H 'Content-Type: application/json' -d '{\"name\": \"llama3.2\"}' && sleep infinity"
         
