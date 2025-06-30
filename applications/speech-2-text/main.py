@@ -1,5 +1,6 @@
 """ """
 import uvicorn
+import torch
 import whisper
 from fastapi import FastAPI, BackgroundTasks
 from fastapi.responses import RedirectResponse
@@ -9,7 +10,7 @@ from src.data_controller import Speech2Text, callbacks
 
 app = FastAPI()
 
-model = whisper.load_model("base.en").to("cuda:0")
+model = whisper.load_model("base.en").to("cuda:0" if torch.cuda.is_available() else "cpu")
 
 @app.get("/")
 async def landing():
@@ -25,6 +26,6 @@ def predict(payload:S2TModel, background_tasks: BackgroundTasks):
     background_tasks.add_task(callbacks, "background processing started")
     return {"text": result.get("text","")}
 
-if __name__ == "__main__":
-    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+# if __name__ == "__main__":
+#     uvicorn.run("main:app", host="0.0.0.0", port=8003, reload=True)
 
