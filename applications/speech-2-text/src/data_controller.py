@@ -1,5 +1,6 @@
 """ """
 import whisper
+import requests
 
 class Speech2Text():
     def __init__(self, audio_path: str):
@@ -13,3 +14,11 @@ class Speech2Text():
 
 def callbacks(*args, **kwargs):
     """ """
+
+class LlmRefiner():
+    def __init__(self):
+        self.ollma_k8s_url: str = "http://ollama.ollama-ns.svc.cluster.local/api/generate" # http://<service-name>.<namespace>.svc.cluster.local
+
+    def pretiffy(self, text: str):
+        """ """
+

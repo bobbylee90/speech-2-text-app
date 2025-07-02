@@ -4,6 +4,7 @@ metadata:
   labels:
     app: s2t
   name: s2t
+  namespace: s2t-ns
 spec:
   replicas: 3
   selector:
