@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: s2t
+  name: s2t
+  namespace: s2t-ns
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: s2t
+  template:
+    metadata:
+      labels:
+        app: s2t
+    spec:
+      containers:
+      - image: bobbylee90/speech2text-app:0.1.0
+        name: s2t
+        ports:
+        - containerPort: 8003
+        resources:
+          requests:
+            cpu: 2000m
+            memory: 4Gi
+          limits:
+            cpu: 4000m
+            memory: 8Gi
